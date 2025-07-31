@@ -86,7 +86,6 @@
 
         .nav-links li {
             margin-left: 30px;
-            position: relative;
         }
 
         .nav-links a {
@@ -125,6 +124,23 @@
 
         .nav-links a:not(.services-link):hover:after {
             width: 100%;
+        }
+
+        /* Mobile menu button */
+        .mobile-menu-btn {
+            display: none;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 8px 15px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .mobile-menu-btn:hover {
+            background: var(--primary-dark);
         }
 
         /* Hero */
@@ -333,6 +349,7 @@
         @media (max-width: 768px) {
             .hero {
                 min-height: 600px;
+                padding-top: 70px;
             }
 
             .hero h1 {
@@ -354,6 +371,33 @@
             .nav-links {
                 display: none;
             }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .logo {
+                font-size: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 28px;
+            }
+            
+            .hero p {
+                font-size: 14px;
+            }
+            
+            .btn {
+                padding: 12px 24px;
+                font-size: 14px;
+            }
+            
+            .stat-number {
+                font-size: 36px;
+            }
         }
     </style>
 </head>
@@ -362,6 +406,7 @@
         <div class="container">
             <nav>
                 <a href="#" class="logo">Omsk<span>Eco-Hotel</span></a>
+                <button class="mobile-menu-btn">Меню</button>
                 <ul class="nav-links">
                     <li><a href="#" class="services-link">Наши услуги</a></li>
                 </ul>
@@ -431,5 +476,36 @@
 
     <!-- Font Awesome for icons -->
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            const navLinks = document.querySelector('.nav-links');
+            if (navLinks.style.display === 'flex') {
+                navLinks.style.display = 'none';
+            } else {
+                navLinks.style.display = 'flex';
+                navLinks.style.flexDirection = 'column';
+                navLinks.style.position = 'absolute';
+                navLinks.style.top = '100%';
+                navLinks.style.right = '0';
+                navLinks.style.background = 'white';
+                navLinks.style.padding = '20px';
+                navLinks.style.boxShadow = '0 5px 10px rgba(0,0,0,0.1)';
+                navLinks.style.borderRadius = '0 0 10px 10px';
+                navLinks.style.width = '200px';
+            }
+        });
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const navLinks = document.querySelector('.nav-links');
+            const mobileBtn = document.querySelector('.mobile-menu-btn');
+            
+            if (!navLinks.contains(event.target) && event.target !== mobileBtn) {
+                navLinks.style.display = 'none';
+            }
+        });
+    </script>
 </body>
 </html>

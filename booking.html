@@ -3,11 +3,187 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Бронирование | Omsk Eco-Hotel</title>
+    <title>Бронирование подтверждено | Omsk Eco-Hotel</title>
     <style>
-        /* Все предыдущие стили остаются без изменений */
-        
-        /* Добавляем новые стили для уведомления */
+        :root {
+            --primary: #2E8B57;
+            --primary-dark: #1F6B3D;
+            --secondary: #F5F5F5;
+            --accent: #FFD700;
+            --text: #333333;
+            --text-light: #777777;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: white;
+            color: var(--text);
+            line-height: 1.7;
+            font-weight: 400;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        @font-face {
+            font-family: 'Montserrat';
+            font-style: normal;
+            font-weight: 400;
+            src: url(https://fonts.gstatic.com/s/montserrat/v25/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCtr6Hw5aX8.woff2) format('woff2');
+        }
+
+        @font-face {
+            font-family: 'Montserrat';
+            font-style: normal;
+            font-weight: 600;
+            src: url(https://fonts.gstatic.com/s/montserrat/v25/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCu173w5aX8.woff2) format('woff2');
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            z-index: 1000;
+            padding: 20px 0;
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo span {
+            color: var(--text);
+            margin-left: 8px;
+        }
+
+        /* Confirmation Section */
+        .confirmation {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 120px 0 80px;
+        }
+
+        .confirmation-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .confirmation-icon {
+            font-size: 100px;
+            color: var(--primary);
+            margin-bottom: 30px;
+            animation: bounce 1s ease infinite alternate;
+        }
+
+        @keyframes bounce {
+            from { transform: translateY(0); }
+            to { transform: translateY(-20px); }
+        }
+
+        .confirmation h1 {
+            font-size: 48px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .confirmation p {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: var(--text-light);
+        }
+
+        .ticket-number {
+            font-size: 28px;
+            font-weight: 600;
+            color: var(--primary-dark);
+            background: var(--secondary);
+            padding: 15px 30px;
+            border-radius: 8px;
+            display: inline-block;
+            margin: 30px 0;
+            letter-spacing: 2px;
+            border: 2px dashed var(--primary);
+        }
+
+        .notice {
+            font-size: 18px;
+            margin-bottom: 40px;
+            color: var(--text);
+            font-style: italic;
+            padding: 15px;
+            background: rgba(46, 139, 87, 0.1);
+            border-radius: 8px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(46, 139, 87, 0.3);
+        }
+
+        .btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(46, 139, 87, 0.4);
+        }
+
+        /* Already Booked Section */
+        .already-booked {
+            display: none;
+            flex: 1;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 120px 0 80px;
+        }
+
+        .already-booked-icon {
+            font-size: 100px;
+            color: var(--primary);
+            margin-bottom: 30px;
+        }
+
+        /* Alert Box */
         .alert-box {
             position: fixed;
             top: 50%;
@@ -23,12 +199,12 @@
             text-align: center;
             display: none;
         }
-        
+
         .alert-box h2 {
             color: var(--primary);
             margin-bottom: 15px;
         }
-        
+
         .alert-ticket {
             font-size: 24px;
             font-weight: bold;
@@ -39,7 +215,7 @@
             border-radius: 8px;
             border: 2px dashed var(--primary);
         }
-        
+
         .overlay {
             position: fixed;
             top: 0;
@@ -50,29 +226,151 @@
             z-index: 1000;
             display: none;
         }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .footer-logo {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .contact-info p {
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .copyright {
+            margin-top: 20px;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .confirmation, .already-booked {
+                padding: 100px 0 60px;
+            }
+
+            .confirmation h1, .already-booked h1 {
+                font-size: 36px;
+            }
+
+            .confirmation p, .already-booked p {
+                font-size: 18px;
+            }
+
+            .ticket-number {
+                font-size: 22px;
+                padding: 10px 20px;
+            }
+
+            .notice {
+                font-size: 16px;
+            }
+
+            .confirmation-icon, .already-booked-icon {
+                font-size: 80px;
+            }
+
+            .alert-box {
+                width: 90%;
+                padding: 20px;
+            }
+
+            .alert-ticket {
+                font-size: 20px;
+                padding: 10px;
+            }
+        }
     </style>
 </head>
 <body>
-    <!-- Весь предыдущий HTML остается без изменений -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">Omsk<span>Eco-Hotel</span></a>
+            </nav>
+        </div>
+    </header>
 
-    <!-- Добавляем новые элементы для уведомления -->
+    <section class="confirmation" id="confirmationSection">
+        <div class="container">
+            <div class="confirmation-content">
+                <div class="confirmation-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h1>Ваш номер успешно забронирован!</h1>
+                <p>Мы отправили подтверждение на вашу электронную почту. Ждем вас в Omsk Eco-Hotel!</p>
+
+                <div class="ticket-number" id="ticketNumber">O-E-H-<span id="ticketDigits">000000</span></div>
+
+                <p class="notice">Пожалуйста, сохраните этот номер талона и предъявите его на ресепшене при заселении.</p>
+
+                <a href="index.html" class="btn">Вернуться на главную</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="already-booked" id="alreadyBookedSection">
+        <div class="container">
+            <div class="confirmation-content">
+                <div class="already-booked-icon">
+                    <i class="fas fa-exclamation-circle"></i>
+                </div>
+                <h1>Вы уже забронировали номер!</h1>
+                <p>Ваш номер талона: <strong>O-E-H-<span id="existingTicketNumber">000000</span></strong></p>
+                <p class="notice">Пожалуйста, предъявите этот номер на ресепшене при заселении.</p>
+
+                <a href="index.html" class="btn">Вернуться на главную</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Alert Box -->
     <div class="overlay" id="overlay"></div>
-    
     <div class="alert-box" id="alertBox">
         <div class="already-booked-icon">
             <i class="fas fa-exclamation-circle"></i>
         </div>
-        <h2>Номер уже забронирован!</h2>
-        <p>Вы уже оформили бронирование в нашем отеле.</p>
-        
+        <h2>Вы уже забронировали номер!</h2>
+        <p>Ваше бронирование уже было оформлено ранее.</p>
         <div class="alert-ticket">
-            Ваш номер талона: O-E-H-<span id="alertTicketNumber">000000</span>
+            Номер вашего талона: O-E-H-<span id="alertTicketNumber">000000</span>
         </div>
-        
-        <p>Пожалуйста, сохраните этот номер и предъявите его на ресепшене при заселении.</p>
-        
+        <p>Пожалуйста, предъявите этот номер на ресепшене при заселении.</p>
         <a href="index.html" class="btn">Понятно</a>
     </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">Omsk Eco-Hotel</div>
+                <div class="contact-info">
+                    <p>Email: <a href="mailto:schaestie@gmail.com" style="color: white;">schaestie@gmail.com</a></p>
+                    <p>Telegram: <a href="https://t.me/r_l_una" target="_blank" style="color: white;">@r_l_una</a></p>
+                </div>
+                <div class="copyright">
+                    &copy; 2025 Omsk Eco-Hotel. Все права защищены.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Font Awesome for icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 
     <script>
         // Проверяем, есть ли уже бронь
@@ -81,14 +379,16 @@
             document.getElementById('overlay').style.display = 'block';
             document.getElementById('alertBox').style.display = 'block';
             document.getElementById('alertTicketNumber').textContent = localStorage.getItem('ticketNumber');
-            
+            document.getElementById('existingTicketNumber').textContent = localStorage.getItem('ticketNumber');
+
             // Скрываем основное содержимое
             document.getElementById('confirmationSection').style.display = 'none';
+            document.getElementById('alreadyBookedSection').style.display = 'flex';
         } else {
             // Генерация нового номера талона
             const randomNum = Math.floor(100000 + Math.random() * 900000);
             document.getElementById('ticketDigits').textContent = randomNum;
-            
+
             // Сохраняем в localStorage факт бронирования и номер
             localStorage.setItem('hasBooked', 'true');
             localStorage.setItem('ticketNumber', randomNum);

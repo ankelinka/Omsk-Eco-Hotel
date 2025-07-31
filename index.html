@@ -402,5 +402,17 @@
 
     <!-- Font Awesome for icons -->
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+<!-- В остальном код остается таким же, меняем только кнопку бронирования -->
+<a href="booking.html" class="btn" id="bookBtn">Забронировать номер</a>
+
+<!-- Добавляем в конец файла перед закрывающим </body> -->
+<script>
+    document.getElementById('bookBtn').addEventListener('click', function(e) {
+        if(localStorage.getItem('hasBooked') === 'true') {
+            e.preventDefault();
+            alert('Вы уже забронировали номер! Номер вашего талона: O-E-H-' + localStorage.getItem('ticketNumber'));
+        }
+    });
+</script>
 </body>
 </html>

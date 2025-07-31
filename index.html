@@ -287,6 +287,50 @@
             text-align: center;
         }
 
+        /* Alert Box */
+        .alert-box {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.2);
+            z-index: 1001;
+            max-width: 90%;
+            width: 500px;
+            text-align: center;
+            display: none;
+        }
+
+        .alert-box h2 {
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .alert-ticket {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-dark);
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(46, 139, 87, 0.1);
+            border-radius: 8px;
+            border: 2px dashed var(--primary);
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            display: none;
+        }
+
         /* Responsive */
         @media (max-width: 992px) {
             .hero h1 {
@@ -325,6 +369,16 @@
                 flex-direction: column;
                 gap: 15px;
             }
+
+            .alert-box {
+                width: 90%;
+                padding: 20px;
+            }
+
+            .alert-ticket {
+                font-size: 20px;
+                padding: 10px;
+            }
         }
     </style>
 </head>
@@ -343,9 +397,9 @@
                 <h1>Мы не просто студенты, мы из отряда гранд</h1>
                 <p>Тут какоето будет микроописание отеля</p>
                 <div class="btn-group">
-    <a href="booking.html" class="btn" id="bookBtn">Забронировать номер</a>
-    <a href="#" class="btn btn-outline">Наши услуги</a>
-</div>
+                    <a href="booking.html" class="btn" id="bookBtn">Забронировать номер</a>
+                    <a href="#" class="btn btn-outline">Наши услуги</a>
+                </div>
             </div>
         </div>
     </section>
@@ -368,6 +422,7 @@
             </div>
         </div>
     </section>
+
 
     <section class="history">
         <div class="container">
@@ -400,7 +455,40 @@
         </div>
     </footer>
 
+    <!-- Alert Box -->
+    <div class="overlay" id="overlay"></div>
+    <div class="alert-box" id="alertBox">
+        <div class="confirmation-icon">
+            <i class="fas fa-exclamation-circle"></i>
+        </div>
+        <h2>Вы уже забронировали номер!</h2>
+        <p>Ваше бронирование уже было оформлено ранее.</p>
+        <div class="alert-ticket">
+            Номер вашего талона: O-E-H-<span id="alertTicketNumber">000000</span>
+        </div>
+        <p>Пожалуйста, предъявите этот номер на ресепшене при заселении.</p>
+        <a href="#" class="btn" id="closeAlert">Понятно</a>
+    </div>
+
     <!-- Font Awesome for icons -->
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+    <script>
+        // Проверка бронирования при клике на кнопку
+        document.getElementById('bookBtn').addEventListener('click', function(e) {
+            if(localStorage.getItem('hasBooked') === 'true') {
+                e.preventDefault();
+                document.getElementById('overlay').style.display = 'block';
+                document.getElementById('alertBox').style.display = 'block';
+                document.getElementById('alertTicketNumber').textContent = localStorage.getItem('ticketNumber');
+            }
+        });
+
+        // Закрытие alert box
+        document.getElementById('closeAlert').addEventListener('click', function() {
+            document.getElementById('overlay').style.display = 'none';
+            document.getElementById('alertBox').style.display = 'none';
+        });
+    </script>
 </body>
 </html>

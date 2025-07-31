@@ -167,6 +167,22 @@
             box-shadow: 0 6px 20px rgba(46, 139, 87, 0.4);
         }
 
+        /* Already Booked Section */
+        .already-booked {
+            display: none;
+            flex: 1;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 120px 0 80px;
+        }
+
+        .already-booked-icon {
+            font-size: 100px;
+            color: var(--primary);
+            margin-bottom: 30px;
+        }
+
         /* Footer */
         footer {
             background: var(--primary);
@@ -200,15 +216,15 @@
 
         /* Responsive */
         @media (max-width: 768px) {
-            .confirmation {
+            .confirmation, .already-booked {
                 padding: 100px 0 60px;
             }
             
-            .confirmation h1 {
+            .confirmation h1, .already-booked h1 {
                 font-size: 36px;
             }
             
-            .confirmation p {
+            .confirmation p, .already-booked p {
                 font-size: 18px;
             }
             
@@ -221,7 +237,7 @@
                 font-size: 16px;
             }
             
-            .confirmation-icon {
+            .confirmation-icon, .already-booked-icon {
                 font-size: 80px;
             }
         }
@@ -236,7 +252,7 @@
         </div>
     </header>
 
-    <section class="confirmation">
+    <section class="confirmation" id="confirmationSection">
         <div class="container">
             <div class="confirmation-content">
                 <div class="confirmation-icon">
@@ -248,6 +264,21 @@
                 <div class="ticket-number" id="ticketNumber">O-E-H-<span id="ticketDigits">000000</span></div>
                 
                 <p class="notice">Пожалуйста, сохраните этот номер талона и предъявите его на ресепшене при заселении.</p>
+                
+                <a href="index.html" class="btn">Вернуться на главную</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="already-booked" id="alreadyBookedSection">
+        <div class="container">
+            <div class="confirmation-content">
+                <div class="already-booked-icon">
+                    <i class="fas fa-exclamation-circle"></i>
+                </div>
+                <h1>Вы уже забронировали номер!</h1>
+                <p>Ваш номер талона: <strong>O-E-H-<span id="existingTicketNumber">000000</span></strong></p>
+                <p class="notice">Пожалуйста, предъявите этот номер на ресепшене при заселении.</p>
                 
                 <a href="index.html" class="btn">Вернуться на главную</a>
             </div>
@@ -273,17 +304,21 @@
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     
     <script>
-        // Генерация случайного 6-значного номера талона
-        function generateTicketNumber() {
+        // Проверяем, есть ли уже бронь
+        if(localStorage.getItem('hasBooked') === 'true') {
+            // Показываем сообщение о существующей брони
+            document.getElementById('confirmationSection').style.display = 'none';
+            document.getElementById('alreadyBookedSection').style.display = 'flex';
+            document.getElementById('existingTicketNumber').textContent = localStorage.getItem('ticketNumber');
+        } else {
+            // Генерация нового номера талона
             const randomNum = Math.floor(100000 + Math.random() * 900000);
             document.getElementById('ticketDigits').textContent = randomNum;
             
-            // Можно также сохранить в localStorage для демонстрации
-            localStorage.setItem('lastTicketNumber', randomNum);
+            // Сохраняем в localStorage факт бронирования и номер
+            localStorage.setItem('hasBooked', 'true');
+            localStorage.setItem('ticketNumber', randomNum);
         }
-        
-        // Вызываем функцию при загрузке страницы
-        window.onload = generateTicketNumber;
     </script>
 </body>
 </html>

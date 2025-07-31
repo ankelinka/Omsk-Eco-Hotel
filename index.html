@@ -79,61 +79,6 @@
             margin-left: 8px;
         }
 
-        .nav-links {
-            display: flex;
-            list-style: none;
-        }
-
-        .nav-links li {
-            margin-left: 30px;
-            position: relative;
-        }
-
-        .nav-links a {
-            color: var(--text);
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 16px;
-            transition: all 0.3s;
-            position: relative;
-            padding: 8px 15px;
-            display: inline-block;
-        }
-
-        .nav-links a:after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            background: var(--primary);
-            bottom: 0;
-            left: 15px;
-            transition: width 0.3s;
-        }
-
-        .nav-links a:hover:after {
-            width: calc(100% - 30px);
-        }
-
-        /* Стиль для кнопки "Услуги" */
-        .nav-links li:last-child a {
-            background: var(--primary);
-            color: white;
-            border-radius: 30px;
-            padding: 10px 20px;
-            box-shadow: 0 4px 15px rgba(46, 139, 87, 0.3);
-        }
-
-        .nav-links li:last-child a:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(46, 139, 87, 0.4);
-        }
-
-        .nav-links li:last-child a:after {
-            display: none;
-        }
-
         /* Hero */
         .hero {
             height: 100vh;
@@ -163,6 +108,12 @@
             opacity: 0.9;
         }
 
+        .btn-group {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
         .btn {
             display: inline-block;
             background: var(--primary);
@@ -182,6 +133,18 @@
             background: var(--primary-dark);
             transform: translateY(-3px);
             box-shadow: 0 6px 20px rgba(46, 139, 87, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+            box-shadow: none;
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-3px);
         }
 
         /* Stats */
@@ -358,8 +321,9 @@
                 font-size: 16px;
             }
 
-            .nav-links {
-                display: none;
+            .btn-group {
+                flex-direction: column;
+                gap: 15px;
             }
         }
     </style>
@@ -369,9 +333,6 @@
         <div class="container">
             <nav>
                 <a href="#" class="logo">Omsk<span>Eco-Hotel</span></a>
-                <ul class="nav-links">
-                    <li><a href="#">Услуги</a></li>
-                </ul>
             </nav>
         </div>
     </header>
@@ -381,7 +342,10 @@
             <div class="hero-content">
                 <h1>Мы не просто студенты, мы из отряда гранд</h1>
                 <p>Тут какоето будет микроописание отеля</p>
-                <a href="#" class="btn">Забронировать номер</a>
+                <div class="btn-group">
+                    <a href="#" class="btn">Забронировать номер</a>
+                    <a href="#" class="btn btn-outline">Наши услуги</a>
+                </div>
             </div>
         </div>
     </section>
